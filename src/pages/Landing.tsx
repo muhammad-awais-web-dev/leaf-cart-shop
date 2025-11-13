@@ -73,7 +73,7 @@ const testimonials = [{
   rating: 5
 }, {
   name: 'Emma Williams',
-  text: 'My home feels so much more alive with these beautiful plants. Highly recommend Lovable Plants!',
+  text: 'My home feels so much more alive with these beautiful plants. Highly recommend this shop!',
   rating: 5
 }];
 const Landing = () => {
@@ -88,7 +88,7 @@ const Landing = () => {
               <div className="flex items-center gap-2 mb-6">
                 <Leaf className="h-12 w-12 text-primary" />
                 <h1 className="text-5xl lg:text-6xl font-bold text-foreground">
-                  Lovable Plants
+                  Leaf Cart Shop
                 </h1>
               </div>
               
@@ -244,7 +244,7 @@ const Landing = () => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Leaf className="h-8 w-8 text-primary" />
-                <span className="text-xl font-bold text-foreground">Lovable Plants</span>
+                <span className="text-xl font-bold text-foreground">Leaf Cart Shop</span>
               </div>
               <p className="text-muted-foreground">
                 Bringing nature into your home, one plant at a time.
@@ -280,7 +280,7 @@ const Landing = () => {
           </div>
           
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2025 Lovable Plants. All rights reserved.</p>
+            <p>&copy; 2025 Leaf Cart Shop. All rights reserved.</p>
           </div>
         </div>
       </footer>

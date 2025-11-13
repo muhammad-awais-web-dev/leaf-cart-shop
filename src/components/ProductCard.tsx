@@ -4,10 +4,9 @@ import { Badge } from '@/components/ui/badge';
 import { Plant } from '@/store/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '@/store/CartSlice';
-import { addToWishlist, removeFromWishlist } from '@/store/WishlistSlice';
 import { RootState } from '@/store/store';
 import { toast } from 'sonner';
-import { Heart, ShoppingCart, Users } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
@@ -17,23 +16,11 @@ interface ProductCardProps {
 const ProductCard = ({ plant }: ProductCardProps) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   const isInCart = cartItems.some(item => item.id === plant.id);
-  const isInWishlist = wishlistItems.some(item => item.id === plant.id);
 
   const handleAddToCart = () => {
     dispatch(addItem(plant));
     toast.success(`${plant.name} added to cart!`);
-  };
-
-  const handleWishlist = () => {
-    if (isInWishlist) {
-      dispatch(removeFromWishlist(plant.id));
-      toast.success(`${plant.name} removed from wishlist`);
-    } else {
-      dispatch(addToWishlist(plant));
-      toast.success(`${plant.name} added to wishlist!`);
-    }
   };
 
   return (
@@ -62,29 +49,18 @@ const ProductCard = ({ plant }: ProductCardProps) => {
               {plant.name}
             </h3>
           </Link>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
-            <Users className="w-3 h-3" />
-            <span>{plant.wishlistedBy} users wishlisted</span>
-          </div>
           <p className="text-xl font-bold text-primary">${plant.price.toFixed(2)}</p>
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0 gap-2">
+      <CardFooter className="p-4 pt-0">
         <Button 
           onClick={handleAddToCart}
           disabled={isInCart}
-          className="flex-1"
+          className="w-full"
           variant={isInCart ? "secondary" : "default"}
         >
           <ShoppingCart className="w-4 h-4 mr-2" />
           {isInCart ? 'In Cart' : 'Add to Cart'}
-        </Button>
-        <Button 
-          onClick={handleWishlist}
-          variant={isInWishlist ? "default" : "outline"}
-          size="icon"
-        >
-          <Heart className={`w-4 h-4 ${isInWishlist ? 'fill-current' : ''}`} />
         </Button>
       </CardFooter>
     </Card>

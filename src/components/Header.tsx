@@ -14,7 +14,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
             <Leaf className="h-8 w-8" />
-            <span>Lovable Plants</span>
+            <span>Leaf Cart Shop</span>
           </Link>
           
           <nav className="flex items-center gap-6">

@@ -4,10 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '@/store/CartSlice';
-import { addToWishlist, removeFromWishlist } from '@/store/WishlistSlice';
 import { RootState } from '@/store/store';
 import { toast } from 'sonner';
-import { Heart, ShoppingCart, Users, TrendingUp, ArrowLeft, Sun, Droplets, Sprout } from 'lucide-react';
+import { ShoppingCart, TrendingUp, ArrowLeft, Sun, Droplets, Sprout } from 'lucide-react';
 import { Plant } from '@/store/CartSlice';
 import monsteraImg from '@/assets/monstera.jpg';
 import pothosImg from '@/assets/pothos.jpg';
@@ -24,7 +23,6 @@ const plants: Plant[] = [
     image: monsteraImg,
     category: 'Tropical',
     description: 'A stunning tropical plant with iconic split leaves that brings a jungle vibe to any space. Native to Central America, the Monstera Deliciosa is known for its dramatic fenestrated leaves that develop as the plant matures. This easy-care plant is perfect for adding a bold statement to your home while also purifying the air.',
-    wishlistedBy: 342,
     stock: 5,
     soldLastMonth: 87,
     careLevel: 'Easy',
@@ -38,7 +36,6 @@ const plants: Plant[] = [
     image: pothosImg,
     category: 'Trailing',
     description: 'Perfect for beginners, this trailing plant thrives in various conditions and purifies air. The Golden Pothos features cascading vines with heart-shaped leaves variegated in shades of green and yellow. It\'s virtually indestructible and can tolerate a wide range of light conditions, making it ideal for any room in your home.',
-    wishlistedBy: 528,
     soldLastMonth: 156,
     careLevel: 'Very Easy',
     lightRequirement: 'Low to bright indirect light',
@@ -51,7 +48,6 @@ const plants: Plant[] = [
     image: snakePlantImg,
     category: 'Low-Light',
     description: 'Nearly indestructible, this architectural plant tolerates neglect and low light beautifully. Also known as Mother-in-Law\'s Tongue, the Snake Plant features striking upright leaves with unique patterns. It\'s one of the best air-purifying plants and releases oxygen at night, making it perfect for bedrooms.',
-    wishlistedBy: 456,
     stock: 3,
     soldLastMonth: 203,
     careLevel: 'Very Easy',
@@ -65,7 +61,6 @@ const plants: Plant[] = [
     image: fiddleLeafImg,
     category: 'Tropical',
     description: 'A statement plant with large, violin-shaped leaves that creates a dramatic focal point. The Fiddle Leaf Fig has become an interior design icon, prized for its architectural form and glossy, sculptural leaves. While it requires consistent care, its stunning appearance makes it worth the effort for plant enthusiasts.',
-    wishlistedBy: 691,
     soldLastMonth: 125,
     careLevel: 'Moderate',
     lightRequirement: 'Bright indirect light',
@@ -78,7 +73,6 @@ const plants: Plant[] = [
     image: zzPlantImg,
     category: 'Low-Light',
     description: 'Glossy green leaves and extreme drought tolerance make this a perfect low-maintenance choice. The ZZ Plant features waxy, emerald-green leaves that add a modern touch to any space. Its rhizomes store water, allowing it to survive extended periods without watering, making it ideal for busy plant parents or offices.',
-    wishlistedBy: 389,
     soldLastMonth: 178,
     careLevel: 'Very Easy',
     lightRequirement: 'Low to bright indirect light',
@@ -91,7 +85,6 @@ const plants: Plant[] = [
     image: peaceLilyImg,
     category: 'Trailing',
     description: 'Elegant white blooms and air-purifying qualities make this a popular indoor favorite. The Peace Lily produces beautiful white spathes that resemble flowers, creating an elegant display. It\'s excellent at removing toxins from the air and even tells you when it needs water by drooping slightly.',
-    wishlistedBy: 417,
     soldLastMonth: 192,
     careLevel: 'Easy',
     lightRequirement: 'Low to medium indirect light',
@@ -104,7 +97,6 @@ const ProductDetail = () => {
   const plant = plants.find(p => p.id === Number(id));
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
   
   if (!plant) {
     return (
@@ -121,21 +113,10 @@ const ProductDetail = () => {
   }
 
   const isInCart = cartItems.some(item => item.id === plant.id);
-  const isInWishlist = wishlistItems.some(item => item.id === plant.id);
 
   const handleAddToCart = () => {
     dispatch(addItem(plant));
     toast.success(`${plant.name} added to cart!`);
-  };
-
-  const handleWishlist = () => {
-    if (isInWishlist) {
-      dispatch(removeFromWishlist(plant.id));
-      toast.success(`${plant.name} removed from wishlist`);
-    } else {
-      dispatch(addToWishlist(plant));
-      toast.success(`${plant.name} added to wishlist!`);
-    }
   };
 
   return (
@@ -169,10 +150,6 @@ const ProductDetail = () => {
             <h1 className="text-4xl font-bold text-foreground mb-4">{plant.name}</h1>
             
             <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-              <div className="flex items-center gap-1">
-                <Users className="w-4 h-4" />
-                <span>{plant.wishlistedBy} users wishlisted this</span>
-              </div>
               <div className="flex items-center gap-1">
                 <TrendingUp className="w-4 h-4" />
                 <span>{plant.soldLastMonth} sold in last month</span>
@@ -211,13 +188,6 @@ const ProductDetail = () => {
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 {isInCart ? 'Already in Cart' : 'Add to Cart'}
-              </Button>
-              <Button 
-                onClick={handleWishlist}
-                variant={isInWishlist ? "default" : "outline"}
-                size="lg"
-              >
-                <Heart className={`w-5 h-5 ${isInWishlist ? 'fill-current' : ''}`} />
               </Button>
             </div>
           </div>
