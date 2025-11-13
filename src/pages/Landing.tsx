@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Leaf, ShieldCheck, Truck, Heart, Star, Quote } from 'lucide-react';
+import { ArrowRight, Leaf, ShieldCheck, Truck, Heart, Star, Quote, Calendar, User } from 'lucide-react';
 import Header from '@/components/Header';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { blogPosts } from './Blog';
 import monsteraImg from '@/assets/monstera.jpg';
 import pothosImg from '@/assets/pothos.jpg';
 import snakePlantImg from '@/assets/snake-plant.jpg';
@@ -73,7 +74,7 @@ const testimonials = [{
   rating: 5
 }, {
   name: 'Emma Williams',
-  text: 'My home feels so much more alive with these beautiful plants. Highly recommend Lovable Plants!',
+  text: 'My home feels so much more alive with these beautiful plants. Highly recommend this shop!',
   rating: 5
 }];
 const Landing = () => {
@@ -88,7 +89,7 @@ const Landing = () => {
               <div className="flex items-center gap-2 mb-6">
                 <Leaf className="h-12 w-12 text-primary" />
                 <h1 className="text-5xl lg:text-6xl font-bold text-foreground">
-                  Lovable Plants
+                  Leaf Cart Shop
                 </h1>
               </div>
               
@@ -221,6 +222,52 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Plant Care Tips & Guides</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Expert advice to help your plants thrive
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {blogPosts.slice(0, 3).map((post) => (
+              <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-video overflow-hidden bg-muted">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-3">{post.title}</h3>
+                  <p className="text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+                    <div className="flex items-center gap-1">
+                      <User className="w-3 h-3" />
+                      <span>{post.author}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      <span>{post.date}</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-10">
+            <Link to="/blog">
+              <Button size="lg">Read More Articles</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
@@ -244,7 +291,7 @@ const Landing = () => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Leaf className="h-8 w-8 text-primary" />
-                <span className="text-xl font-bold text-foreground">Lovable Plants</span>
+                <span className="text-xl font-bold text-foreground">Leaf Cart Shop</span>
               </div>
               <p className="text-muted-foreground">
                 Bringing nature into your home, one plant at a time.
@@ -263,8 +310,8 @@ const Landing = () => {
             <div>
               <h4 className="font-semibold text-foreground mb-4">Support</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Care Guides</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Shipping Info</a></li>
+                <li><Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors">Care Guides</Link></li>
+                <li><Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors">Plant Blog</Link></li>
                 <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</a></li>
               </ul>
             </div>
@@ -280,7 +327,7 @@ const Landing = () => {
           </div>
           
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2025 Lovable Plants. All rights reserved.</p>
+            <p>&copy; 2025 Leaf Cart Shop. All rights reserved.</p>
           </div>
         </div>
       </footer>

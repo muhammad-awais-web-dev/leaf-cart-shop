@@ -7,7 +7,6 @@ export interface Plant {
   image: string;
   category: string;
   description: string;
-  wishlistedBy: number;
   stock?: number;
   soldLastMonth: number;
   careLevel: string;
