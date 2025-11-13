@@ -1,7 +1,9 @@
+import { useParams, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import ProductCard from '@/components/ProductCard';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
 import { Plant } from '@/store/CartSlice';
-import { Link } from 'react-router-dom';
 import monsteraImg from '@/assets/monstera.jpg';
 import pothosImg from '@/assets/pothos.jpg';
 import snakePlantImg from '@/assets/snake-plant.jpg';
@@ -92,43 +94,49 @@ const plants: Plant[] = [
   },
 ];
 
-const ProductListing = () => {
-  const categories = Array.from(new Set(plants.map(p => p.category)));
+const Category = () => {
+  const { category } = useParams();
+  const filteredPlants = plants.filter(p => p.category.toLowerCase() === category?.toLowerCase());
+
+  if (!category || filteredPlants.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-muted/30 via-background to-muted/20">
+        <Header />
+        <div className="container mx-auto px-4 py-12 text-center">
+          <h1 className="text-2xl font-bold text-foreground mb-4">Category not found</h1>
+          <Link to="/products">
+            <Button>Back to All Products</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-secondary/10 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-muted/30 via-background to-muted/20">
       <Header />
       
       <div className="container mx-auto px-4 py-12">
+        <Link to="/products" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6 transition-colors">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to All Products
+        </Link>
+
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Our Collection</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-4">{category} Plants</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our carefully curated selection of houseplants, perfect for any space and skill level.
+            Explore our selection of {category.toLowerCase()} plants, perfect for creating your ideal indoor garden.
           </p>
         </div>
 
-        {categories.map(category => (
-          <div key={category} className="mb-12">
-            <div className="flex items-center justify-between mb-6 pb-2 border-b border-border">
-              <h2 className="text-2xl font-semibold text-foreground">
-                {category}
-              </h2>
-              <Link to={`/category/${category}`} className="text-primary hover:underline text-sm font-medium">
-                View All
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {plants
-                .filter(plant => plant.category === category)
-                .map(plant => (
-                  <ProductCard key={plant.id} plant={plant} />
-                ))}
-            </div>
-          </div>
-        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPlants.map(plant => (
+            <ProductCard key={plant.id} plant={plant} />
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProductListing;
+export default Category;

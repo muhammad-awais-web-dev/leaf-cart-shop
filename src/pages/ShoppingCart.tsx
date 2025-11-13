@@ -20,9 +20,9 @@ const ShoppingCart = () => {
   };
 
   if (cartItems.length === 0) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/10 to-background">
+      <Header />
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-md mx-auto text-center">
             <ShoppingBag className="h-24 w-24 mx-auto text-muted-foreground mb-4" />

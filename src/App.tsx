@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Landing from "./pages/Landing";
 import ProductListing from "./pages/ProductListing";
+import ProductDetail from "./pages/ProductDetail";
+import Category from "./pages/Category";
 import ShoppingCart from "./pages/ShoppingCart";
 import NotFound from "./pages/NotFound";
 
@@ -22,6 +24,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/products" element={<ProductListing />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/category/:category" element={<Category />} />
             <Route path="/cart" element={<ShoppingCart />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

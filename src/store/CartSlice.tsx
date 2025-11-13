@@ -6,6 +6,13 @@ export interface Plant {
   price: number;
   image: string;
   category: string;
+  description: string;
+  wishlistedBy: number;
+  stock?: number;
+  soldLastMonth: number;
+  careLevel: string;
+  lightRequirement: string;
+  wateringFrequency: string;
 }
 
 export interface CartItem extends Plant {
