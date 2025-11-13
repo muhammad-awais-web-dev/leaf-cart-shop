@@ -3,75 +3,81 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, ShieldCheck, Truck, Heart, Star, Quote } from 'lucide-react';
 import Header from '@/components/Header';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import monsteraImg from '@/assets/monstera.jpg';
 import pothosImg from '@/assets/pothos.jpg';
 import snakePlantImg from '@/assets/snake-plant.jpg';
 import fiddleLeafImg from '@/assets/fiddle-leaf.jpg';
 import zzPlantImg from '@/assets/zz-plant.jpg';
 import peaceLilyImg from '@/assets/peace-lily.jpg';
-
-const carouselPlants = [
-  { name: 'Monstera Deliciosa', image: monsteraImg },
-  { name: 'Golden Pothos', image: pothosImg },
-  { name: 'Snake Plant', image: snakePlantImg },
-  { name: 'Fiddle Leaf Fig', image: fiddleLeafImg },
-  { name: 'ZZ Plant', image: zzPlantImg },
-  { name: 'Peace Lily', image: peaceLilyImg },
-];
-
-const features = [
-  {
-    icon: ShieldCheck,
-    title: 'Quality Guaranteed',
-    description: 'Every plant is hand-selected and inspected to ensure the highest quality.',
-  },
-  {
-    icon: Truck,
-    title: 'Fast Delivery',
-    description: 'Free shipping on orders over $50. Your plants arrive fresh and ready to thrive.',
-  },
-  {
-    icon: Heart,
-    title: 'Expert Care Tips',
-    description: 'Detailed care instructions with every purchase to help your plants flourish.',
-  },
-];
-
-const popularPlants = [
-  { name: 'Monstera Deliciosa', price: 45.99, image: monsteraImg, rating: 5 },
-  { name: 'Golden Pothos', price: 24.99, image: pothosImg, rating: 5 },
-  { name: 'Snake Plant', price: 32.99, image: snakePlantImg, rating: 5 },
-  { name: 'Fiddle Leaf Fig', price: 65.99, image: fiddleLeafImg, rating: 4 },
-];
-
-const testimonials = [
-  {
-    name: 'Sarah Johnson',
-    text: 'Absolutely love my plants! They arrived in perfect condition and the care instructions were so helpful.',
-    rating: 5,
-  },
-  {
-    name: 'Michael Chen',
-    text: 'Best plant shopping experience ever. The quality is outstanding and delivery was super fast.',
-    rating: 5,
-  },
-  {
-    name: 'Emma Williams',
-    text: 'My home feels so much more alive with these beautiful plants. Highly recommend Lovable Plants!',
-    rating: 5,
-  },
-];
-
+const carouselPlants = [{
+  name: 'Monstera Deliciosa',
+  image: monsteraImg
+}, {
+  name: 'Golden Pothos',
+  image: pothosImg
+}, {
+  name: 'Snake Plant',
+  image: snakePlantImg
+}, {
+  name: 'Fiddle Leaf Fig',
+  image: fiddleLeafImg
+}, {
+  name: 'ZZ Plant',
+  image: zzPlantImg
+}, {
+  name: 'Peace Lily',
+  image: peaceLilyImg
+}];
+const features = [{
+  icon: ShieldCheck,
+  title: 'Quality Guaranteed',
+  description: 'Every plant is hand-selected and inspected to ensure the highest quality.'
+}, {
+  icon: Truck,
+  title: 'Fast Delivery',
+  description: 'Free shipping on orders over $50. Your plants arrive fresh and ready to thrive.'
+}, {
+  icon: Heart,
+  title: 'Expert Care Tips',
+  description: 'Detailed care instructions with every purchase to help your plants flourish.'
+}];
+const popularPlants = [{
+  name: 'Monstera Deliciosa',
+  price: 45.99,
+  image: monsteraImg,
+  rating: 5
+}, {
+  name: 'Golden Pothos',
+  price: 24.99,
+  image: pothosImg,
+  rating: 5
+}, {
+  name: 'Snake Plant',
+  price: 32.99,
+  image: snakePlantImg,
+  rating: 5
+}, {
+  name: 'Fiddle Leaf Fig',
+  price: 65.99,
+  image: fiddleLeafImg,
+  rating: 4
+}];
+const testimonials = [{
+  name: 'Sarah Johnson',
+  text: 'Absolutely love my plants! They arrived in perfect condition and the care instructions were so helpful.',
+  rating: 5
+}, {
+  name: 'Michael Chen',
+  text: 'Best plant shopping experience ever. The quality is outstanding and delivery was super fast.',
+  rating: 5
+}, {
+  name: 'Emma Williams',
+  text: 'My home feels so much more alive with these beautiful plants. Highly recommend Lovable Plants!',
+  rating: 5
+}];
 const Landing = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Header />
       
       {/* Hero Section */}
@@ -100,7 +106,7 @@ const Landing = () => {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6">
+                <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-md">
                   Learn More
                 </Button>
               </div>
@@ -110,24 +116,18 @@ const Landing = () => {
             <div className="relative animate-fade-in">
               <Carousel className="w-full max-w-md mx-auto">
                 <CarouselContent>
-                  {carouselPlants.map((plant, index) => (
-                    <CarouselItem key={index}>
+                  {carouselPlants.map((plant, index) => <CarouselItem key={index}>
                       <Card className="border-2 shadow-lg">
                         <CardContent className="p-0">
                           <div className="aspect-square overflow-hidden rounded-t-lg">
-                            <img 
-                              src={plant.image} 
-                              alt={plant.name}
-                              className="w-full h-full object-cover"
-                            />
+                            <img src={plant.image} alt={plant.name} className="w-full h-full object-cover" />
                           </div>
                           <div className="p-4 text-center">
                             <h3 className="font-semibold text-lg text-foreground">{plant.name}</h3>
                           </div>
                         </CardContent>
                       </Card>
-                    </CarouselItem>
-                  ))}
+                    </CarouselItem>)}
                 </CarouselContent>
                 <CarouselPrevious />
                 <CarouselNext />
@@ -148,8 +148,7 @@ const Landing = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+            {features.map((feature, index) => <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="pt-8 pb-6">
                   <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <feature.icon className="h-8 w-8 text-primary" />
@@ -157,8 +156,7 @@ const Landing = () => {
                   <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -174,28 +172,20 @@ const Landing = () => {
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {popularPlants.map((plant, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+            {popularPlants.map((plant, index) => <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
                   <div className="aspect-square overflow-hidden bg-muted">
-                    <img 
-                      src={plant.image} 
-                      alt={plant.name}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+                    <img src={plant.image} alt={plant.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                   </div>
                   <div className="p-4">
                     <div className="flex items-center gap-1 mb-2">
-                      {[...Array(plant.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-accent text-accent" />
-                      ))}
+                      {[...Array(plant.rating)].map((_, i) => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">{plant.name}</h3>
                     <p className="text-xl font-bold text-primary">${plant.price.toFixed(2)}</p>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
           
           <div className="text-center mt-10">
@@ -217,20 +207,16 @@ const Landing = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="relative">
+            {testimonials.map((testimonial, index) => <Card key={index} className="relative">
                 <CardContent className="pt-8 pb-6">
                   <Quote className="h-10 w-10 text-primary/20 mb-4" />
                   <div className="flex items-center gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-accent text-accent" />
-                    ))}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
                   </div>
                   <p className="text-muted-foreground mb-4 italic">"{testimonial.text}"</p>
                   <p className="font-semibold text-foreground">- {testimonial.name}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -298,8 +284,6 @@ const Landing = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Landing;
