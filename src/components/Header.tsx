@@ -18,8 +18,14 @@ const Header = () => {
           </Link>
           
           <nav className="flex items-center gap-6">
+            <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">
+              Home
+            </Link>
             <Link to="/products" className="text-foreground hover:text-primary transition-colors font-medium">
               Shop
+            </Link>
+            <Link to="/blog" className="text-foreground hover:text-primary transition-colors font-medium">
+              Blog
             </Link>
             <Link to="/cart" className="relative text-foreground hover:text-primary transition-colors">
               <ShoppingCart className="h-6 w-6" />
